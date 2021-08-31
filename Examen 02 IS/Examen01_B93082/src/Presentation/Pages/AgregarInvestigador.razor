@@ -1,0 +1,44 @@
+﻿@page "/addInv"
+@using Examen01_B93082.Domain.Investigadores.Entities
+@inject IInvestigadorService addInv
+@inject NavigationManager NavigationManager
+
+<h3>Agregar Investigador</h3>
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Nombre" class="control-label">Nombre</label>
+                <input form="Nombre" class="form-control" @bind="@inv.Nombre" />
+            </div>
+            <div class="form-group">
+                <label for="MaximoGrado" class="control-label">Grado Maximo</label>
+                <input form="MaximoGrado" class="form-control" @bind="@inv.MaximoGrado" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateInv" value="Save" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code{
+    Investigador inv = new();
+
+    protected async void CreateInv()
+    {
+        await addInv.AddInvestigadorAsync(inv);
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+}

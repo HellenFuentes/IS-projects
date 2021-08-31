@@ -1,0 +1,49 @@
+﻿@page "/addCoor"
+@using Examen01_B93082.Data.Entities
+@using Examen01_B93082.Data.Services
+@inject CoordinadorService addCoor
+@inject NavigationManager NavigationManager
+
+<h3>Agregar Coordinador</h3>
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Nombre" class="control-label">Nombre</label>
+                <input form="Nombre" class="form-control" @bind="@coor.Nombre" />
+            </div>
+            <div class="form-group">
+                <label for="FechaInicioNombramiento" class="control-label">Fecha Inicio Nombramiento</label>
+                <input form="FechaInicioNombramiento" class="form-control" @bind="@coor.FechaInicioNombramiento" />
+            </div>
+            <div class="form-group">
+                <label for="FechaFinalNombramiento" class="control-label">Fecha Final Nombramiento</label>
+                <input form="FechaFinalNombramiento" class="form-control" @bind="@coor.FechaFinalNombramiento" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateInv" value="Save" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code{
+    Coordinador coor = new();
+
+    protected async void CreateInv()
+    {
+        await addCoor.InsertCoordinadores(coor);
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+}

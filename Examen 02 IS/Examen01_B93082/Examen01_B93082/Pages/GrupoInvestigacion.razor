@@ -1,0 +1,81 @@
+﻿@page "/grupos"
+@using Examen01_B93082.Data.Entities
+@using Examen01_B93082.Data.Services
+@inject ViewGrupoInvestigacionService viewGroupsService
+@inject NavigationManager NavigationManager
+@inject InvestigadorServide InvesService
+@inject CoordinadorService CoorService
+
+
+<h3>Grupos de Investigacion</h3>
+
+@*Buttons to add groups, investigadores and coordinadores*@
+
+<NavLink class="nav-link" href="/Addgrupos">
+    <span class="oi oi-plus" aria-hidden="true">Agregar Grupo</span>
+</NavLink>
+
+
+@*Visialization of the groups*@
+
+@if (groupsObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha de Creacion</th>
+                <th>Coordinador</th>
+                <th>Investigador</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in groupsObj)
+            {
+                getNames(emp);
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.Nombre</td>
+                    <td>@emp.Descripcion</td>
+                    <td>@emp.FechaCreacion</td>
+                    <td>@coorName</td>
+                    <td>@investName</td>
+
+                    <td>
+                        <a class="nav-link" href="editarGrupo/@emp.Id">
+                            <span class="oi oi-pencil" aria-hidden="true">Editar</span>
+                        </a>
+                        <a class="nav-link" href="eliminarGrupo/@emp.Id">
+                            <span class="oi oi-trash" aria-hidden="true">Eliminar</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private string coorName = "";
+    private string investName = "";
+    List<GruposInvestigacion> groupsObj;
+
+    //Initialize the method that gets all the groups
+    protected override async Task OnInitializedAsync()
+    {
+        groupsObj = await Task.Run(() => viewGroupsService.GetAllGroupsAsync());
+    }
+
+    private void getNames(GruposInvestigacion actual)
+    {
+        coorName = CoorService.getNameById(actual.Coordinador);
+        investName = InvesService.getNameById(actual.Investigadores);
+    }
+}

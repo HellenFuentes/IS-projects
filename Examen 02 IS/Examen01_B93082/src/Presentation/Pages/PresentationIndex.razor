@@ -1,0 +1,21 @@
+@page "/indexPresentation"
+@using Examen01_B93082.Domain.Autores.Entities;
+@inject IAutorService autor_service
+
+
+
+@foreach (Autor a in listaAutores) {
+
+    <p> @a.Nombre  @a.Apellido </p>
+}
+
+@code{
+    IEnumerable<Autor> autores;
+    List<Autor> listaAutores = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        autores = await autor_service.GetAutoresAsync();
+        listaAutores = autores.ToList();
+    }
+}

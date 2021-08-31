@@ -1,0 +1,91 @@
+﻿@page "/grupos"
+@using Examen01_B93082.Domain.GruposInvestigacion.Entities
+@using Examen01_B93082.Domain.Investigadores.Entities
+@inject IGrupoInvestigacionService viewGroupsService
+@inject NavigationManager NavigationManager
+@inject IInvestigadorService InvesService
+@inject ICoordinadorService CoorService
+@inject IParticipaGrupoInvestigacionService ParticipaService
+
+
+<h3>Grupos de Investigacion</h3>
+
+@*Buttons to add groups, investigadores and coordinadores*@
+
+<NavLink class="nav-link" href="/Addgrupos">
+    <span class="oi oi-plus" aria-hidden="true">Agregar Grupo</span>
+</NavLink>
+
+
+@*Visialization of the groups*@
+
+@if (groupsObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha de Creacion</th>
+                <th>Coordinador</th>
+                <th>Investigador</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in groupsObj)
+            {
+                getNames(emp);
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.Nombre</td>
+                    <td>@emp.Descripcion</td>
+                    <td>@emp.FechaCreacion</td>
+                    <td>@coorName</td>
+                    <td>@foreach (Investigador invest in investigadoresGrupo) { 
+                            <p> @invest.Nombre </p>
+                    }</td>
+
+                    <td>
+                        <a class="nav-link" href="editarGrupo/@emp.Id">
+                            <span class="oi oi-pencil" aria-hidden="true">Editar</span>
+                        </a>
+                        <a class="nav-link" href="eliminarGrupo/@emp.Id">
+                            <span class="oi oi-trash" aria-hidden="true">Eliminar</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private string coorName = "";
+    private string investName = "";
+    IEnumerable<Investigador> container;
+    List<GrupoInvestigacion> groupsObj;
+    List<Investigador> investigadoresGrupo = new();
+
+    //Initialize the method that gets all the groups
+    protected override async Task OnInitializedAsync()
+    {
+        groupsObj = await viewGroupsService.GetGruposInvestigacionAsync();
+    }
+
+    private void getNames(GrupoInvestigacion actual)
+    {
+        if (actual.Coordinador != null)
+        {
+            coorName = CoorService.getNameById(actual.Coordinador.Value);
+        }
+        container = ParticipaService.GetInvestigadoresByGrupoInvestigacionId(actual.Id);
+        investigadoresGrupo = container.ToList();
+    }
+
+}

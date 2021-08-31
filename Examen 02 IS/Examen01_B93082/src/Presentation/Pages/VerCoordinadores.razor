@@ -1,0 +1,46 @@
+﻿@page "/verCoor"
+@using Examen01_B93082.Domain.Coordinadores.Entities
+@inject ICoordinadorService verCoor
+@inject NavigationManager NavigationManager
+
+<h3>Ver Coordinadores</h3>
+
+@if (coorObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fecha Inicio de Nombramiento</th>
+                <th>Fecha Final de Nombramiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in coorObj)
+            {
+            <tr>
+                <td>@emp.Id</td>
+                <td>@emp.Nombre</td>
+                <td>@emp.FechaInicioNombramiento</td>
+                <td>@emp.FechaFinalNombramiento</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<Coordinador> coorObj;
+
+    //Initialize the method that gets all the groups
+    protected override async Task OnInitializedAsync()
+    {
+        coorObj = await Task.Run(() => verCoor.GetAllCoordinadoresAsync());
+    }
+}

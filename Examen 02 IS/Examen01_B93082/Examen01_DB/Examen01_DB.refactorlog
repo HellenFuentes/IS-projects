@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="176b96a8-3e05-46c7-b553-ae8a51953e0b" ChangeDateTime="06/26/2021 07:58:14">
+    <Property Name="ElementName" Value="[dbo].[ProyectoInvestigacion].[nombre]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ProyectoInvestigacion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Nombre" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="37129329-6fc6-4762-926b-dafcf253e73d" ChangeDateTime="06/26/2021 08:00:04">
+    <Property Name="ElementName" Value="[dbo].[ProyectoInvestigacion].[Fecha]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ProyectoInvestigacion]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FechaInicio" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="acf9eef1-1a43-4548-82d9-547dbc849058" ChangeDateTime="06/26/2021 15:25:40">
+    <Property Name="ElementName" Value="[dbo].[AutoresDePub].[DoiPublicacion]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AutoresDePub]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DoiPub" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7346674e-5900-4773-95f2-1c6c495e85c2" ChangeDateTime="06/26/2021 15:28:32">
+    <Property Name="ElementName" Value="[dbo].[Publicaciones].[Referencia]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Publicaciones]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Ref" />
+  </Operation>
+</Operations>

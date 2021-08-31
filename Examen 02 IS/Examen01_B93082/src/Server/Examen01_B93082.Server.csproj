@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Examen01_B93082.Domain.csproj" />
+    <ProjectReference Include="..\Application\Examen01_B93082.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\Examen01_B93082.Infrastructure.csproj" />
+    <ProjectReference Include="..\Presentation\Examen01_B93082.Presentation.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

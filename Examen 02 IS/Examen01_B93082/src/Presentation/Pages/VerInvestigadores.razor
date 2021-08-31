@@ -1,0 +1,44 @@
+﻿@page "/verInv"
+@using Examen01_B93082.Domain.Investigadores.Entities
+@inject IInvestigadorService verInv
+@inject NavigationManager NavigationManager
+
+<h3>Ver Investigadores</h3>
+
+@if (invObj is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>MaximoGrado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in invObj)
+            {
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.Nombre</td>
+                    <td>@emp.MaximoGrado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<Investigador> invObj;
+
+    //Initialize the method that gets all the groups
+    protected override async Task OnInitializedAsync()
+    {
+        invObj =  await Task.Run(() => verInv.GetInvestigadoresAsync());
+    }
+}

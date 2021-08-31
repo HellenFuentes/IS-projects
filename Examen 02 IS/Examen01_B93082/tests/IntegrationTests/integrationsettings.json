@@ -1,0 +1,14 @@
+﻿{
+  "ConnectionStrings": {
+    "TestConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Examen01_Test;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+

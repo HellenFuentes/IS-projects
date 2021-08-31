@@ -1,0 +1,62 @@
+﻿@page "/Addgrupos"
+@using Examen01_B93082.Domain.GruposInvestigacion.Entities
+@inject IGrupoInvestigacionService addGrupoService
+@inject NavigationManager NavigationManager
+
+<h3>Grupos de Investigacion</h3>
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="Id" class="control-label">Id (debe ser un id no existente)</label>
+                <input form="Id" class="form-control" @bind="@group.Id" />
+            </div>
+            <div class="form-group">
+                <label for="Nombre" class="control-label">Nombre</label>
+                <input form="Nombre" class="form-control" @bind="@group.Nombre" />
+            </div>
+            <div class="form-group">
+                <label for="Descripcion" class="control-label">Descripcion</label>
+                <input form="Descripcion" class="form-control" @bind="@group.Descripcion" />
+            </div>
+            <div class="form-group">
+                <label for="FechaCreacion" class="control-label">FechaCreacion</label>
+                <input form="FechaCreacion" class="form-control" @bind="@group.FechaCreacion" />
+            </div>
+            <div class="form-group">
+                <label for="Coordinador" class="control-label">Coordinador (id de coordinador)</label>
+                <input form="Coordinador" class="form-control" @bind="@group.Coordinador" />
+            </div>
+            @*<div class="form-group">
+                <label for="Investigadores" class="control-label">Investigadores (id de investigador)</label>
+                <input form="Investigadores" class="form-control" @bind="@group.Investigadores" />
+            </div>*@
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateGroup" value="Save" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code{
+    GrupoInvestigacion group = new();
+
+    protected async void CreateGroup()
+    {
+        await addGrupoService.AddGrupoInvestigacionAsync(group);
+        NavigationManager.NavigateTo("/grupos");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/grupos");
+    }
+
+}

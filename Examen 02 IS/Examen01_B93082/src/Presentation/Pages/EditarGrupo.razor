@@ -1,0 +1,95 @@
+﻿@page "/editarGrupo/{Id}"
+@using Examen01_B93082.Domain.GruposInvestigacion.Entities
+@using Examen01_B93082.Domain.Investigadores.Entities
+@using Examen01_B93082.Domain.ParticipanGrupoInvestigacion.Entities
+@inject IGrupoInvestigacionService editGroupsService
+@inject IParticipaGrupoInvestigacionService ParticipaService
+@inject NavigationManager NavigationManager
+
+<h3>Editar Grupo</h3>
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <input form="Id" class="form-control" @bind="@grupo.Id" />
+            </div>
+            <div class="form-group">
+                <label for="Nombre" class="control-label">Nombre</label>
+                <input form="Nombre" class="form-control" @bind="@grupo.Nombre" />
+            </div>
+            <div class="form-group">
+                <label for="Descripcion" class="control-label">Descripcion</label>
+                <input form="Descripcion" class="form-control" @bind="@grupo.Descripcion" />
+            </div>
+            <div class="form-group">
+                <label for="FechaCreacion" class="control-label">Fecha Creacion</label>
+                <input form="FechaCreacion" class="form-control" @bind="@grupo.FechaCreacion" />
+            </div>
+            <div class="form-group">
+                <label for="Coordinador" class="control-label">Coordinador</label>
+                <input form="Coordinador" class="form-control" @bind="@grupo.Coordinador" />
+            </div>
+            <div class="form-group">
+                <label for="Investigadores" class="control-label">Investigadores</label>
+                @foreach (Investigador invest in listaInvestigadores)
+                {
+                    <input form="Investigadores" class="form-control" @bind="@invest.Nombre" />
+                    <input type="button" class="btn btn-primary" @onclick="() => deleteList(invest.Id)" value="Eliminar" />
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@UpdateGrupo" value="Update" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    GrupoInvestigacion grupo = new();
+    IEnumerable<Investigador> precharge;
+    List<Investigador> listaInvestigadores = new();
+    List<ParticipaGrupoInvestigacion> listForDelete = new();
+
+    [Parameter]
+    public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        grupo = await editGroupsService.GetGrupoInvestigacionByIDAsync(Convert.ToInt32(Id));
+        precharge = ParticipaService.GetInvestigadoresByGrupoInvestigacionId(Convert.ToInt32(Id));
+        listaInvestigadores = precharge.ToList();
+
+    }
+
+    protected async void UpdateGrupo()
+    {
+
+        NavigationManager.NavigateTo("/grupos");
+        foreach (Investigador invest in listaInvestigadores)
+        {
+            if (invest.Nombre.Equals(""))
+            {
+                var del = await ParticipaService.GetParticipaInvestigacionByKeys(invest.Id, Convert.ToInt32(Id));
+                ParticipaService.DeleteParticipaGrupoInvestigacion(del);
+            }
+        }
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/grupos");
+    }
+
+    protected async void deleteList(int investId)
+    {
+        ParticipaGrupoInvestigacion del = await ParticipaService.GetParticipaInvestigacionByKeys(investId, Convert.ToInt32(Id));
+        listForDelete.Add(del);
+    }
+}
