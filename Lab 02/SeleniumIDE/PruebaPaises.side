@@ -1,0 +1,50 @@
+{
+  "id": "b08426a1-6447-44ed-bbd5-3808824f7553",
+  "version": "2.0",
+  "name": "PruebaPaises",
+  "url": "https://localhost:44380/",
+  "tests": [{
+    "id": "a7a20d25-ce07-4ff6-8041-9d2e8084e04d",
+    "name": "Untitled",
+    "commands": [{
+      "id": "8b9636e2-6768-4352-a140-86bf04813b09",
+      "comment": "",
+      "command": "open",
+      "target": "https://localhost:44380/Pais",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "945ddda2-5d31-4c15-a223-2a1d88056ea5",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=th:nth-child(1)",
+      "targets": [
+        ["css=th:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"],
+        ["xpath=//th[contains(.,'Nombre')]", "xpath:innerText"]
+      ],
+      "value": "Nombre"
+    }, {
+      "id": "ba238480-9dbe-4adc-9136-2fa7640e75d0",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=tr:nth-child(3) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(3) > td:nth-child(1)", "css:finder"],
+        ["xpath=//tr[3]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'Costa Rica')]", "xpath:innerText"]
+      ],
+      "value": "Costa Rica"
+    }]
+  }],
+  "suites": [{
+    "id": "eb25337e-26ff-4e50-bd63-8950dd73e213",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a7a20d25-ce07-4ff6-8041-9d2e8084e04d"]
+  }],
+  "urls": ["https://localhost:44380/"],
+  "plugins": []
+}

@@ -1,0 +1,73 @@
+﻿@model ECCI_IS_Lab01_WebApp.Models.Estudiante
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Estudiante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaMatricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaMatricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+
+    </dl>
+
+    <table class="table"> 
+    <tr> 
+        <th> Course Title 
+            </th> 
+        <th> Grade 
+            </th> 
+        <th> Credits 
+            </th> 
+    </tr> 
+    
+    @foreach (var item in Model.Matriculas)
+    {
+        <tr> 
+        <td> @Html.DisplayFor(modelItem => item.Curso.Titulo) 
+            </td> 
+        <td> @Html.DisplayFor(modelItem => item.Nota) 
+            </td> 
+        <td> @Html.DisplayFor(modelItem => item.Curso.Creditos) 
+            </td> 
+        </tr>} 
+    </table>
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EstudianteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

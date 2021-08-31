@@ -1,0 +1,34 @@
+﻿@model ECCI_IS_Lab01_WebApp.Models.Ciudad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ciudad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pai.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pai.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { PaisID = item.PaisId, ID = item.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,77 @@
+{
+  "id": "cc2604bd-42b0-440e-ac7e-789404f8e2dd",
+  "version": "2.0",
+  "name": "TestLaboratorioUI",
+  "url": "https://localhost:44380",
+  "tests": [{
+    "id": "fbded172-3d19-4d85-9cea-3ed511c5c3dd",
+    "name": "PruebaIngresoAplicacion",
+    "commands": [{
+      "id": "22b99ada-cdfb-44ff-8626-4b8483c5a5b2",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "71f71248-e083-4536-930d-6e2844706eec",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "caa16e52-2a54-4599-b245-7511062a27fd",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'ASP.NET')]", "xpath:innerText"]
+      ],
+      "value": "ASP.NET"
+    }, {
+      "id": "118df295-14df-4170-a821-28927cba6f11",
+      "comment": "",
+      "command": "assertTitle",
+      "target": "Home Page - My ASP.NET Application",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "56052e25-ec43-4cc8-9d3a-0ec717467a6e",
+      "comment": "",
+      "command": "assertText",
+      "target": "linkText=Application name",
+      "targets": [
+        ["linkText=Application name", "linkText"],
+        ["css=.navbar-brand", "css:finder"],
+        ["xpath=//a[contains(text(),'Application name')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Application name')]", "xpath:innerText"]
+      ],
+      "value": "Application name"
+    }, {
+      "id": "5bed8931-8752-416e-aabb-09ade6c4a407",
+      "comment": "",
+      "command": "click",
+      "target": "css=.container > div:nth-child(3)",
+      "targets": [
+        ["css=.container > div:nth-child(3)", "css:finder"],
+        ["xpath=//body/div[2]/div[3]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "042d0a8c-1557-4ab7-a51c-1c8bc478bdbe",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["fbded172-3d19-4d85-9cea-3ed511c5c3dd"]
+  }],
+  "urls": ["https://localhost:44380/"],
+  "plugins": []
+}

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ECCI_IS_Lab01_WebApp.Models.Ciudad>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pai.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pai.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { PaisID = item.PaisId, ID = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { PaisID = item.PaisId, ID = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { PaisID = item.PaisId, ID = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,35 @@
+﻿@model ECCI_IS_Lab01_WebApp.Models.CursoDetalles
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Detalles del curso</h2>
+<br />
+<div class="row">
+    <div class="col-lg-4">
+        <label title="Curso que se desean ver los detalles" for="cursos">Curso:</label>
+        @Html.DropDownList("ddlDropDownList", Model.Cursos, null,
+     new
+     {
+         @class = "form-control",
+         id = "cursos",
+         placeholder = "Curso",
+         data_width = "100%",
+         onchange = "cambioCursoSelecionado(this.value)"
+        })
+    </div>
+    <div class="col-lg-2">
+        <label title="Cantidad de estudiantes matriculados en un curso"
+               for="cantidadEstudiantes">Estudiantes:</label>
+        @Html.TextBoxFor(model => model.CantidadEstudiantes, new
+        {
+            disabled = "disabled",
+            id =
+       "cantidadEstudiantes"
+        })
+    </div>
+    <div class="col-lg-2">
+        <label title="Promedio del curso" for="promedio">Promedio:</label>
+        @Html.TextBoxFor(model => model.PromedioClase, new { disabled = "disabled", id = "promedio" })
+    </div>
+</div>
+<script src="~/Scripts/CursoDetallesScript.js"></script>
